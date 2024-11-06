@@ -1,27 +1,27 @@
-const int potPin = 34;    // Pin input potensiometer
-const int servoPin = 18;  // Pin output servo
+#include <WiFi.h>
+
+// Kredensial WiFi Wokwi
+const char *ssid = "Wokwi-GUEST";
+const char *password = "";
 
 void setup() {
-  pinMode(servoPin, OUTPUT); // Mengatur pin servo sebagai output
-  Serial.begin(115200);      // Memulai komunikasi serial
+  Serial.begin(115200);
+  delay(1000);
+
+  // Menghubungkan ke WiFi Wokwi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nTerhubung ke WiFi Wokwi");
+
+  // Mendapatkan dan menampilkan MAC address
+  String macAddress = WiFi.macAddress();
+  Serial.print("MAC Address ESP32: ");
+  Serial.println(macAddress);
 }
 
 void loop() {
-  int potValue = analogRead(potPin); // Membaca nilai potensiometer (0-4095)
-
-  // Mengonversi nilai potensiometer ke rentang yang sesuai untuk servo (0.5ms - 2.5ms pulse width)
-  int pulseWidth = map(potValue, 0, 4095, 500, 2500);
-
-  // Mengirimkan sinyal PWM secara manual dengan menulis pulsa HIGH dan LOW
-  digitalWrite(servoPin, HIGH);
-  delayMicroseconds(pulseWidth);
-  digitalWrite(servoPin, LOW);
-  delay(20 - pulseWidth / 1000); // Delay untuk mencapai periode 20ms
-
-  Serial.print("Pot Value: ");
-  Serial.print(potValue);
-  Serial.print(" => Pulse Width: ");
-  Serial.println(pulseWidth);
+  // Tidak ada yang dilakukan di loop
 }
-
-
