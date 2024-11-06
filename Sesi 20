@@ -1,20 +1,20 @@
 #include <WiFi.h>
 
-// Kredensial WiFi Wokwi
-const char *ssid = "Wokwi-GUEST";
-const char *password = "";
+// Kredensial WiFi Oppo Reno7
+const char *ssid = "Oppo Reno7";
+const char *password = "spartax123";
 
 void setup() {
   Serial.begin(115200);
   delay(1000);
 
-  // Menghubungkan ke WiFi Wokwi
+  // Menghubungkan ke WiFi Oppo Reno7
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\nTerhubung ke WiFi Wokwi");
+  Serial.println("\nTerhubung ke WiFi Oppo Reno7");
 
   // Mendapatkan dan menampilkan MAC address
   String macAddress = WiFi.macAddress();
